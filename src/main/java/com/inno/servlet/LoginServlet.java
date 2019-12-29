@@ -25,13 +25,11 @@ public class LoginServlet extends HttpServlet {
         userDao = (UserDao) getServletContext().getAttribute("dao");
         if (userDao != null) {
             userDao.createTable();
-            User testUser = new User(
-                    null,
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test");
+            User testUser = new User.Builder("test", "test")
+                    .withPassword("test")
+                    .withPhone("03")
+                    .withEmail("test")
+                    .build();
             if (!userDao.addUser(testUser)) {
                 throw new IllegalArgumentException("Can't add a testUser");
             }
